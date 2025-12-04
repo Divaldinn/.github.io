@@ -380,4 +380,63 @@ footer {
     nav {
         padding: 20px;
     }
+/* =========================================
+   MOBILE RESPONSIVE FIX (Pégalo al final)
+   ========================================= */
+@media screen and (max-width: 768px) {
+
+    /* 1. Ajustar el Menú de Navegación */
+    nav {
+        padding: 15px; /* Menos espacio */
+        flex-direction: column; /* Poner el logo arriba y menú abajo */
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 10px; /* Juntar más los enlaces */
+        flex-wrap: wrap; /* Permitir que bajen si no caben */
+        justify-content: center;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem; /* Letra un poco más chica */
+    }
+
+    /* 2. Ajustar Textos Gigantes */
+    .hero h1 {
+        font-size: 2.5rem; /* Reducir el título principal */
+    }
+    
+    .hero .subtitle {
+        font-size: 1.5rem;
+    }
+
+    /* 3. Ajustar los Contenedores */
+    .container {
+        padding: 0 20px; /* Margen lateral seguro */
+    }
+
+    section {
+        padding: 60px 0; /* Menos altura entre secciones */
+    }
+
+    /* 4. Tarjetas de Proyectos en Columna */
+    .project-card, .skill-category {
+        padding: 1.5rem; /* Menos relleno interno */
+    }
+    
+    .project-header {
+        flex-direction: row; /* Mantener iconos alineados */
+    }
+
+    /* 5. Ocultar la Línea de Tiempo en Móvil (Suele estorbar) */
+    .timeline-container {
+        display: none !important; 
+    }
+    
+    /* 6. Ajustar formulario de contacto */
+    .contact-form {
+        width: 100%; /* Que ocupe todo el ancho disponible */
+    }
+}
 }
