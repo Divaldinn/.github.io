@@ -239,11 +239,46 @@ document.addEventListener('scroll', () => {
     document.getElementById("timeline-progress").style.height = scrolled + "%";
 });
 
-// Analytics (Mock)
+/* =========================================
+   REAL ANALYTICS (CountAPI + Time Tracker)
+   ========================================= */
+
 const analyticsData = {
     startTime: Date.now(),
-    visits: 1
+    visits: "Cargando..." // Texto temporal mientras conecta
 };
+
+// 1. Función para obtener las visitas reales
+function fetchVisitCount() {
+    // Usamos tu usuario 'divaldinn' como namespace para que sea único
+    fetch('https://api.countapi.xyz/hit/divaldinn.github.io/visits')
+        .then(res => res.json())
+        .then(data => {
+            analyticsData.visits = data.value; // Guardamos el valor real
+            updateDisplay(); // Actualizamos el texto
+        })
+        .catch(err => {
+            console.error("Error al obtener visitas:", err);
+            analyticsData.visits = "(Offline)";
+        });
+}
+
+// 2. Función para actualizar el texto en pantalla (Tiempo + Visitas)
+function updateDisplay() {
+    const timeSpent = Math.floor((Date.now() - analyticsData.startTime) / 1000);
+    const display = document.getElementById('analytics-display');
+    
+    if (display) {
+        // Muestra: Tiempo en página: 12s | Visitas Totales: 450
+        display.innerHTML = `Time on page: ${timeSpent}s | Total Visits: ${analyticsData.visits}`;
+    }
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    fetchVisitCount(); // 1. Pedir el número de visitas al iniciar
+    setInterval(updateDisplay, 1000); // 2. Actualizar el cronómetro cada segundo
+});
 
 function updateAnalytics() {
     const timeSpent = Math.floor((Date.now() - analyticsData.startTime) / 1000);
@@ -274,3 +309,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
