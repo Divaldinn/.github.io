@@ -1,7 +1,129 @@
-/* ... Tus imports y estilos base ... */
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&family=Roboto+Mono&display=swap");
+
+:root {
+    --bg-color: #0a192f;      /* Tu azul oscuro de fondo */
+    --card-bg: #112240;       /* Color de las tarjetas */
+    --text-color: #ccd6f6;
+    --text-secondary: #8892b0;
+    --accent-color: #64ffda;  /* Verde menta */
+    --line-color: #233554;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    --font-alt: 'League Spartan', system-ui, sans-serif; /* Para el efecto glow */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color); /* AQUÍ ESTÁ EL FONDO OSCURO */
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
 /* =========================================
-   GLOWY HOVER EFFECT (ESTILOS FINALES)
+   ESTILOS GENERALES (Nav, Hero, etc.)
+   ========================================= */
+
+/* Navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(10, 25, 47, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+}
+
+.logo { color: var(--accent-color); font-family: var(--font-heading); font-weight: 700; font-size: 1.5rem; }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { color: var(--text-color); text-decoration: none; font-size: 0.9rem; font-family: var(--font-heading); transition: color 0.3s; }
+.nav-links a:hover { color: var(--accent-color); }
+
+/* Selector de Idioma */
+.lang-switcher {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.lang-switcher option { background-color: var(--bg-color); }
+
+/* Layout Containers */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+section { padding: 100px 0; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+
+/* Tipografía */
+h1, h2, h3 { color: #e6f1ff; margin-bottom: 20px; }
+h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.1; }
+h2 { font-size: 2rem; color: var(--accent-color); }
+.subtitle { font-size: 2.5rem; color: var(--text-secondary); margin-bottom: 20px; }
+
+/* Botones */
+.cta-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+.cta-btn:hover { background: rgba(100, 255, 218, 0.1); }
+
+/* Timeline Lateral */
+.timeline-container {
+    position: fixed; left: 40px; top: 100px; bottom: 0; width: 2px;
+    background: var(--line-color); z-index: 50; display: none;
+}
+@media (min-width: 768px) { .timeline-container { display: block; } }
+.timeline-progress { width: 100%; background: var(--accent-color); height: 0%; box-shadow: 0 0 10px var(--accent-color); transition: height 0.1s; }
+
+/* Otros Estilos (About, Skills) */
+.about-content, .skill-category {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    margin-bottom: 20px;
+}
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.skill-category ul { list-style: none; }
+.skill-category li { margin-bottom: 10px; color: var(--text-secondary); font-family: 'Roboto Mono', monospace; font-size: 0.9rem; }
+.skill-category i { color: var(--accent-color); margin-right: 10px; width: 20px; }
+
+/* Formularios */
+.contact-form { max-width: 600px; width: 100%; }
+input, textarea { width: 100%; padding: 10px; background: #112240; border: 1px solid var(--line-color); color: var(--text-color); border-radius: 4px; margin-bottom: 15px; }
+button[type="submit"] { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 10px 20px; cursor: pointer; border-radius: 4px; }
+
+/* Footer */
+footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-heading); }
+.social-links a { color: var(--text-color); margin: 0 10px; font-size: 1.5rem; transition: color 0.3s; }
+.social-links a:hover { color: var(--accent-color); }
+
+
+/* =========================================
+   GLOWY HOVER EFFECT (ESTILOS DEFINITIVOS)
    ========================================= */
 
 .main__heading {
@@ -15,34 +137,34 @@
 
 .cards {
   position: relative;
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  width: 100%;
 }
 
 .cards__inner {
   display: flex;
   flex-wrap: wrap;
   gap: 2.5em;
+  justify-content: center; /* Centrar las tarjetas si sobran espacios */
 }
 
 .card {
   --flow-space: 0.5em;
   --hsl: var(--hue), var(--saturation), var(--lightness);
-  flex: 1 1 14rem;
+  flex: 1 1 18rem; /* Un poco más anchas base */
   padding: 1.5em 2em;
   display: grid;
   grid-template-rows: auto auto auto 1fr;
   align-items: start;
   gap: 1.25em;
   color: #eceff1;
-  background-color: #112240;
+  background-color: var(--card-bg); /* Fondo oscuro de tarjeta */
   border: 1px solid #eceff133;
   border-radius: 15px;
   font-family: var(--font-alt);
-  /* Transición suave para cuando la luz se va */
-  transition: border-color 0.5s ease-out; 
+  transition: border-color 0.5s ease-out; /* Suavizar borde */
 }
 
-/* COLORES */
+/* COLORES POR TARJETA */
 .card:nth-child(1) { --hue: 165; --saturation: 82.26%; --lightness: 51.37%; }
 .card:nth-child(2) { --hue: 291.34; --saturation: 95.9%; --lightness: 61.76%; }
 .card:nth-child(3) { --hue: 338.69; --saturation: 100%; --lightness: 48.04%; }
@@ -76,18 +198,14 @@
   border: none;
 }
 
-/* OVERLAY (La capa de luz) */
+/* OVERLAY DE LUZ */
 .overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   user-select: none;
   opacity: var(--opacity, 0);
-  
-  /* AJUSTE DE MÁSCARA: 
-     Aquí controlamos el tamaño y la intensidad del haz de luz.
-     He aumentado a 30rem para cubrir más área pero con un degradado suave. 
-  */
+  /* Máscara más grande para que la luz sea suave */
   -webkit-mask: radial-gradient(
     30rem 30rem at var(--x) var(--y),
     #000 1%,
@@ -98,14 +216,13 @@
     #000 1%,
     transparent 50%
   );
-  
   transition: 400ms mask ease;
   will-change: mask;
   z-index: 10;
 }
 
 .overlay .card {
-  background-color: hsla(var(--hsl), 0.1); /* Fondo un poco más sutil */
+  background-color: hsla(var(--hsl), 0.1);
   border-color: hsla(var(--hsl), 1);
   box-shadow: 0 0 0 1px inset hsl(var(--hsl));
 }
@@ -128,16 +245,14 @@
   background: hsla(var(--hsl), 0.1);
 }
 
-/* MÓVILES Y TABLETS (Pantallas táctiles) */
-@media (hover: none) {
-    /* En móviles, hacemos que las cartas tengan un borde sutil siempre,
-       porque no siempre hay un puntero encima. */
-    .card {
-        border-color: rgba(255, 255, 255, 0.1); 
-    }
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    nav { flex-direction: column; padding: 15px; }
+    .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero .subtitle { font-size: 1.5rem; }
+    .timeline-container { display: none !important; }
     
-    /* El efecto overlay seguirá funcionando al tocar la pantalla */
-    .overlay {
-        opacity: var(--opacity, 0); /* Se activa solo al tocar */
-    }
+    /* Soporte para Touch (Móvil) */
+    .card { border-color: rgba(255, 255, 255, 0.1); }
 }
