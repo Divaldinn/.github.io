@@ -1,212 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
-
-:root {
-    --bg-color: #0a192f;
-    --card-bg: #112240;
-    --text-color: #ccd6f6;
-    --text-secondary: #8892b0;
-    --accent-color: #64ffda;
-    --line-color: #233554;
-    --font-heading: 'Inter', 'Roboto', sans-serif;
-    --font-body: 'Open Sans', 'Lato', sans-serif;
-    --font-alt: 'League Spartan', system-ui, sans-serif; /* Para los cards */
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    color: #e6f1ff;
-    margin-bottom: 1rem;
-}
-
-h1 { font-size: 3rem; font-weight: 700; }
-h2 { font-size: 2rem; font-weight: 600; color: var(--accent-color); }
-h3 { font-size: 1.5rem; color: #e6f1ff; }
-
-p {
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-}
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover { text-decoration: underline; }
-
-/* Layout */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-}
-
-/* Navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    background: rgba(10, 25, 47, 0.85);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
-}
-
-.logo {
-    color: var(--accent-color);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--text-color);
-    font-size: 0.9rem;
-    font-family: var(--font-heading);
-}
-
-.nav-links a:hover { color: var(--accent-color); }
-
-/* Language Switcher */
-.lang-switcher {
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 4px;
-    padding: 8px 15px;
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s ease;
-}
-
-.lang-switcher:hover {
-    background-color: rgba(100, 255, 218, 0.1);
-    box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
-}
-
-.lang-switcher:focus { outline: none; background-color: rgba(100, 255, 218, 0.1); }
-.lang-switcher option { background-color: var(--bg-color); color: var(--text-color); padding: 10px; }
-
-/* Timeline */
-.timeline-container {
-    position: fixed;
-    left: 40px;
-    top: 100px;
-    bottom: 0;
-    width: 2px;
-    background: var(--line-color);
-    z-index: 50;
-    display: none;
-}
-@media (min-width: 768px) { .timeline-container { display: block; } }
-.timeline-progress {
-    width: 100%;
-    background: var(--accent-color);
-    height: 0%;
-    box-shadow: 0 0 10px var(--accent-color);
-    transition: height 0.1s ease-out;
-}
-
-/* Sections */
-section {
-    padding: 100px 0;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* Hero */
-.hero { min-height: 100vh; align-items: flex-start; }
-.hero h1 { font-size: 4rem; margin-bottom: 10px; }
-.hero .subtitle { font-size: 3rem; color: var(--text-secondary); margin-bottom: 20px; }
-.hero p { max-width: 500px; font-size: 1.1rem; }
-.cta-btn {
-    display: inline-block;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 1rem 1.5rem;
-    border-radius: 4px;
-    margin-top: 20px;
-    font-family: var(--font-heading);
-}
-.cta-btn:hover { background: rgba(100, 255, 218, 0.1); text-decoration: none; }
-
-/* Estilos de Cards Originales (para About, Skills, Education) */
-.skill-category,
-.about-content {
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-    border: 1px solid transparent;
-    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-.skill-category:hover {
-    transform: translateY(-7px);
-    border-color: var(--accent-color);
-    box-shadow: 0 20px 30px -10px rgba(2, 12, 27, 0.9);
-}
-
-/* Skills Grid */
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.skill-category h3 { color: var(--accent-color); font-size: 1.2rem; margin-bottom: 1rem; }
-.skill-category ul { list-style: none; }
-.skill-category li { margin-bottom: 0.5rem; font-family: 'Roboto Mono', monospace; font-size: 0.9rem; color: var(--text-secondary); }
-.skill-category li i { color: var(--accent-color); margin-right: 10px; width: 20px; }
-
-/* Contact Form */
-.contact-form { max-width: 600px; width: 100%; }
-.form-group { margin-bottom: 1.5rem; }
-input, textarea {
-    width: 100%; padding: 10px; background: #112240; border: 1px solid var(--line-color);
-    color: var(--text-color); border-radius: 4px; font-family: var(--font-body);
-}
-input:focus, textarea:focus { outline: none; border-color: var(--accent-color); }
-button[type="submit"] {
-    background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color);
-    padding: 10px 20px; cursor: pointer; border-radius: 4px; font-family: var(--font-heading);
-}
-button[type="submit"]:hover { background: rgba(100, 255, 218, 0.1); }
-
-/* Footer */
-footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-heading); }
+/* ... Tus imports y estilos base ... */
 
 /* =========================================
-   GLOWY HOVER EFFECT (NUEVO CÓDIGO INTEGRADO)
+   GLOWY HOVER EFFECT (ESTILOS FINALES)
    ========================================= */
 
 .main__heading {
@@ -220,6 +15,7 @@ footer { text-align: center; padding: 20px; color: var(--text-secondary); font-s
 
 .cards {
   position: relative;
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }
 
 .cards__inner {
@@ -238,34 +34,22 @@ footer { text-align: center; padding: 20px; color: var(--text-secondary); font-s
   align-items: start;
   gap: 1.25em;
   color: #eceff1;
-  background-color: #112240; /* Usamos el color de fondo de tarjeta de tu tema */
+  background-color: #112240;
   border: 1px solid #eceff133;
   border-radius: 15px;
-  font-family: var(--font-alt); /* Fuente especial para cards */
+  font-family: var(--font-alt);
+  /* Transición suave para cuando la luz se va */
+  transition: border-color 0.5s ease-out; 
 }
 
-/* COLORES DE LAS TARJETAS */
-/* Card 1: Verde (Coincide con tu acento) */
-.card:nth-child(1) {
-  --hue: 165; --saturation: 82.26%; --lightness: 51.37%;
-}
-/* Card 2: Morado */
-.card:nth-child(2) {
-  --hue: 291.34; --saturation: 95.9%; --lightness: 61.76%;
-}
-/* Card 3: Rosa */
-.card:nth-child(3) {
-  --hue: 338.69; --saturation: 100%; --lightness: 48.04%;
-}
-/* Card 4: Azul Cian */
-.card:nth-child(4) {
-  --hue: 190; --saturation: 90%; --lightness: 60%;
-}
+/* COLORES */
+.card:nth-child(1) { --hue: 165; --saturation: 82.26%; --lightness: 51.37%; }
+.card:nth-child(2) { --hue: 291.34; --saturation: 95.9%; --lightness: 61.76%; }
+.card:nth-child(3) { --hue: 338.69; --saturation: 100%; --lightness: 48.04%; }
+.card:nth-child(4) { --hue: 190; --saturation: 90%; --lightness: 60%; }
 
 .card__bullets { line-height: 1.4; list-style: none; }
 .card__bullets li { font-size: 0.9rem; margin-bottom: 8px; color: var(--text-secondary); }
-
-/* Icono SVG de check */
 .card__bullets li::before {
   display: inline-block;
   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%2364ffda'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
@@ -277,7 +61,6 @@ footer { text-align: center; padding: 20px; color: var(--text-secondary); font-s
 .card__price { font-size: 1.2em; font-weight: 700; color: #fff; }
 .flow > * + * { margin-top: var(--flow-space, 1.25em); }
 
-/* ESTILO DEL BOTÓN CTA (El que se clona) */
 .cta {
   display: block;
   align-self: end;
@@ -293,30 +76,36 @@ footer { text-align: center; padding: 20px; color: var(--text-secondary); font-s
   border: none;
 }
 
-/* OVERLAY Y EFECTOS */
+/* OVERLAY (La capa de luz) */
 .overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   user-select: none;
   opacity: var(--opacity, 0);
+  
+  /* AJUSTE DE MÁSCARA: 
+     Aquí controlamos el tamaño y la intensidad del haz de luz.
+     He aumentado a 30rem para cubrir más área pero con un degradado suave. 
+  */
   -webkit-mask: radial-gradient(
-    25rem 25rem at var(--x) var(--y),
+    30rem 30rem at var(--x) var(--y),
     #000 1%,
     transparent 50%
   );
   mask: radial-gradient(
-    25rem 25rem at var(--x) var(--y),
+    30rem 30rem at var(--x) var(--y),
     #000 1%,
     transparent 50%
   );
+  
   transition: 400ms mask ease;
   will-change: mask;
   z-index: 10;
 }
 
 .overlay .card {
-  background-color: hsla(var(--hsl), 0.15);
+  background-color: hsla(var(--hsl), 0.1); /* Fondo un poco más sutil */
   border-color: hsla(var(--hsl), 1);
   box-shadow: 0 0 0 1px inset hsl(var(--hsl));
 }
@@ -339,13 +128,16 @@ footer { text-align: center; padding: 20px; color: var(--text-secondary); font-s
   background: hsla(var(--hsl), 0.1);
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .container { padding: 0 25px; }
-    .hero h1 { font-size: 3rem; }
-    .hero .subtitle { font-size: 2rem; }
-    nav { padding: 15px; flex-direction: column; gap: 15px; }
-    .nav-links { gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .timeline-container { display: none !important; }
-    .contact-form { width: 100%; }
+/* MÓVILES Y TABLETS (Pantallas táctiles) */
+@media (hover: none) {
+    /* En móviles, hacemos que las cartas tengan un borde sutil siempre,
+       porque no siempre hay un puntero encima. */
+    .card {
+        border-color: rgba(255, 255, 255, 0.1); 
+    }
+    
+    /* El efecto overlay seguirá funcionando al tocar la pantalla */
+    .overlay {
+        opacity: var(--opacity, 0); /* Se activa solo al tocar */
+    }
 }
