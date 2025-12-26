@@ -1,18 +1,23 @@
+/* Importamos fuentes */
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
+
 :root {
-    --bg-color: #0a192f;
-    --card-bg: #112240;
+    --bg-color: #0a192f;     /* Tu azul oscuro original */
+    --card-bg: #112240;      /* Tu color de tarjeta original */
     --text-color: #ccd6f6;
-    --text-secondary: #8892b0;
     --accent-color: #64ffda;
-    --line-color: #233554;
-    --font-heading: 'Inter', 'Roboto', sans-serif;
-    --font-body: 'Open Sans', 'Lato', sans-serif;
+    --font-heading: 'League Spartan', sans-serif; /* Usamos la fuente del efecto para títulos */
+    --font-body: 'Open Sans', sans-serif;
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -21,310 +26,183 @@ body {
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    /* Quitamos el grid del body del ejemplo para no romper tu layout general */
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    color: #e6f1ff;
-    margin-bottom: 1rem;
-}
+/* =========================================
+   ESTILOS GENERALES DEL PORTAFOLIO
+   ========================================= */
 
-h1 { font-size: 3rem; font-weight: 700; }
-h2 { font-size: 2rem; font-weight: 600; color: var(--accent-color); }
-h3 { font-size: 1.5rem; color: #e6f1ff; }
-
-p {
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-}
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover { text-decoration: underline; }
-
-/* Layout */
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-}
-
-/* Navigation */
+/* Navegación */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 50px;
+    background: rgba(10, 25, 47, 0.9);
     position: fixed;
     width: 100%;
     top: 0;
-    background: rgba(10, 25, 47, 0.85);
-    backdrop-filter: blur(10px);
     z-index: 100;
-    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+}
+.logo { font-family: var(--font-heading); font-weight: 700; color: var(--accent-color); font-size: 1.5rem;}
+.nav-links a { margin-left: 20px; text-decoration: none; color: #fff; font-size: 0.9rem; }
+.lang-switcher { margin-left: 20px; padding: 5px; background: transparent; color: var(--accent-color); border: 1px solid var(--accent-color); border-radius: 4px; }
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px; /* Un poco más ancho para que quepan las tarjetas */
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.logo {
-    color: var(--accent-color);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--text-color);
-    font-size: 0.9rem;
-    font-family: var(--font-heading);
-}
-
-.nav-links a:hover { color: var(--accent-color); }
-
-/* Language Switcher */
-.lang-switcher {
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 4px;
-    padding: 8px 15px;
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s ease;
-}
-
-.lang-switcher:hover {
-    background-color: rgba(100, 255, 218, 0.1);
-    box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
-}
-
-.lang-switcher:focus {
-    outline: none;
-    background-color: rgba(100, 255, 218, 0.1);
-}
-
-.lang-switcher option {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding: 10px;
-}
-
-/* Path of Light (Timeline) */
-.timeline-container {
-    position: fixed;
-    left: 40px;
-    top: 100px;
-    bottom: 0;
-    width: 2px;
-    background: var(--line-color);
-    z-index: 50;
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .timeline-container { display: block; }
-}
-
-.timeline-progress {
-    width: 100%;
-    background: var(--accent-color);
-    height: 0%;
-    box-shadow: 0 0 10px var(--accent-color);
-    transition: height 0.1s ease-out;
-}
-
-/* Sections */
 section {
     padding: 100px 0;
     min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-/* Hero Section */
-.hero {
-    min-height: 100vh;
-    align-items: flex-start;
-}
-
-.hero h1 { font-size: 4rem; margin-bottom: 10px; }
-.hero .subtitle { font-size: 3rem; color: var(--text-secondary); margin-bottom: 20px; }
-.hero p { max-width: 500px; font-size: 1.1rem; }
-
+/* Hero y Textos */
+h1, h2, h3 { color: #e6f1ff; margin-bottom: 20px; font-family: var(--font-heading); }
+h1 { font-size: 3.5rem; line-height: 1.1; }
 .cta-btn {
     display: inline-block;
+    padding: 12px 24px;
     border: 1px solid var(--accent-color);
     color: var(--accent-color);
-    padding: 1rem 1.5rem;
-    border-radius: 4px;
-    margin-top: 20px;
-    font-family: var(--font-heading);
-}
-
-.cta-btn:hover {
-    background: rgba(100, 255, 218, 0.1);
     text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
+.cta-btn:hover { background: rgba(100, 255, 218, 0.1); }
 
-/* BASE CARDS & COMPONENTS */
-.project-card,
-.skill-category,
-.about-content {
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 25px; /* Margin for fallback if grid fails */
-    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-    border: 1px solid transparent;
-    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-/* Standard Hover (Applied to items NOT in the glow system like Skills) */
-.skill-category:hover {
-    transform: translateY(-7px);
-    border-color: var(--accent-color);
-    box-shadow: 0 20px 30px -10px rgba(2, 12, 27, 0.9);
-}
-
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.folder-icon { color: var(--accent-color); font-size: 2rem; }
-
-.project-tech {
-    display: flex;
-    gap: 15px;
-    font-family: var(--font-heading);
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-top: 1rem;
-}
-
-/* Skills Grid */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.skill-category h3 { color: var(--accent-color); font-size: 1.2rem; margin-bottom: 1rem; }
-.skill-category ul { list-style: none; }
-.skill-category li {
-    margin-bottom: 0.5rem;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-.skill-category li i { color: var(--accent-color); margin-right: 10px; width: 20px; }
-
-/* Contact Section */
-.contact-form { max-width: 600px; width: 100%; }
-.form-group { margin-bottom: 1.5rem; }
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    background: #112240;
-    border: 1px solid var(--line-color);
-    color: var(--text-color);
-    border-radius: 4px;
-    font-family: var(--font-body);
-}
-
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-button[type="submit"] {
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-family: var(--font-heading);
-}
-
-button[type="submit"]:hover { background: rgba(100, 255, 218, 0.1); }
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    font-family: var(--font-heading);
-}
+/* Skills (Mantenemos tus estilos simples para skills) */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.skill-category { background: var(--card-bg); padding: 20px; border-radius: 10px; }
+.skill-category ul { list-style: none; padding-left: 0; }
+.skill-category li { margin-bottom: 8px; color: #8892b0; }
 
 /* =========================================
-   GLOWY HOVER EFFECT INTEGRATION
+   INTEGRACIÓN DEL EFECTO GLOW (CÓDIGO PROPORCIONADO)
    ========================================= */
+
+.main__heading {
+    font-weight: 600;
+    font-size: 2.25em;
+    margin-bottom: 0.75em;
+    text-align: center;
+    color: #eceff1;
+}
 
 .cards {
     position: relative;
 }
 
-/* New Grid Layout for Projects inside the Glow Wrapper */
 .cards__inner {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5em;
 }
 
-/* Update project-card for use within the glow system */
-.project-card {
-    /* Theme accent color (Teal #64ffda) to HSL approx */
-    --hue: 166;
-    --saturation: 100%;
-    --lightness: 70%;
+/* ESTILO DE LA TARJETA BASE */
+.card {
+    --flow-space: 0.5em;
     --hsl: var(--hue), var(--saturation), var(--lightness);
     
-    background-color: var(--card-bg); 
-    margin-bottom: 0; /* Let grid handle gaps */
-    position: relative;
-    z-index: 1; 
-    
-    /* Remove the translation transform here to keep alignment with overlay */
-    transition: background-color 0.2s;
+    flex: 1 1 14rem;
+    padding: 1.5em 2em;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    align-items: start;
+    gap: 1.25em;
+    color: #eceff1;
+    background-color: #2b2b2b; /* Color de fondo oscuro del ejemplo */
+    border: 1px solid #eceff133;
+    border-radius: 15px;
+    transition: 400ms background ease; /* Transición suave */
 }
 
-/* Disable the original lift effect for these cards to maintain overlay sync */
-.project-card:hover {
-    transform: none; 
-    box-shadow: none; /* Shadow handled by overlay */
+/* COLORES ESPECÍFICOS PARA CADA TARJETA */
+/* Proyecto 1: Verde (Original del ejemplo) */
+.card:nth-child(1) {
+    --hue: 165;
+    --saturation: 82.26%;
+    --lightness: 51.37%;
 }
 
-/* THE OVERLAY (Ghost Layer) */
+/* Proyecto 2: Morado (Original del ejemplo) */
+.card:nth-child(2) {
+    --hue: 291.34;
+    --saturation: 95.9%;
+    --lightness: 61.76%;
+}
+
+/* Proyecto 3: Rosa (Original del ejemplo) */
+.card:nth-child(3) {
+    --hue: 338.69;
+    --saturation: 100%;
+    --lightness: 48.04%;
+}
+
+/* Proyecto 4: Azul (Agregado para tu 4to proyecto) */
+.card:nth-child(4) {
+    --hue: 210;
+    --saturation: 100%;
+    --lightness: 60%;
+}
+
+/* BULLETS Y LISTAS DENTRO DE LA TARJETA */
+.card__bullets {
+    line-height: 1.4;
+    list-style: none; /* Asegurar que no haya bullets default */
+}
+
+.card__bullets li::before {
+    display: inline-block;
+    /* Icono de Check SVG incluido en el código */
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%23dddddd'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
+    transform: translatey(0.25ch);
+    margin-right: 1ch;
+}
+
+.card__heading {
+    font-size: 1.5em; /* Ligeramente más grande para títulos de proyectos */
+    font-weight: 600;
+}
+
+.card__price {
+    font-size: 1.2em; /* Ajustado para texto de tecnologías */
+    font-weight: 700;
+    color: #fff;
+}
+
+.flow > * + * {
+    margin-top: var(--flow-space, 1.25em);
+}
+
+/* BOTÓN CTA (El que brilla) */
+.cta {
+    display: block;
+    align-self: end;
+    margin: 1em 0 0.5em 0;
+    text-align: center;
+    text-decoration: none;
+    color: #fff !important; /* Forzar blanco */
+    background-color: #0d0d0d;
+    padding: 0.7em;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+}
+
+/* EL EFECTO OVERLAY (La magia) */
 .overlay {
     position: absolute;
     inset: 0;
     pointer-events: none;
     user-select: none;
     opacity: var(--opacity, 0);
-    z-index: 2;
-    
-    /* The Flashlight Mask */
     -webkit-mask: radial-gradient(
         25rem 25rem at var(--x) var(--y),
         #000 1%,
@@ -335,46 +213,41 @@ footer {
         #000 1%,
         transparent 50%
     );
-    
     transition: 400ms mask ease;
     will-change: mask;
+    z-index: 10;
 }
 
-/* Style of the card when illuminated */
-.overlay .project-card {
-    background-color: hsla(var(--hsl), 0.1);
-    border-color: hsla(var(--hsl), 1);
-    box-shadow: 0 0 0 1px inset hsla(var(--hsl), 0.5);
-    
-    /* Hide duplicate content */
-    color: transparent; 
+/* Estilo de la tarjeta ILUMINADA dentro del overlay */
+.overlay .card {
+    background-color: hsla(var(--hsl), 0.15); /* Fondo tintado */
+    border-color: hsla(var(--hsl), 1);        /* Borde brillante */
+    box-shadow: 0 0 0 1px inset hsl(var(--hsl)); /* Resplandor interior */
 }
 
-.overlay .project-card * {
-    opacity: 0; 
+/* Estilo del botón CTA ILUMINADO dentro del overlay */
+.overlay .cta {
+    display: block;
+    grid-row: -1;
+    width: 100%;
+    background-color: hsl(var(--hsl)); /* Botón totalmente relleno de color */
+    box-shadow: 0 0 0 1px hsl(var(--hsl));
 }
 
-/* Interaction for non-overlay cards */
-:not(.overlay) > .project-card:hover {
-    background: rgba(100, 255, 218, 0.05); 
+/* Hover en las tarjetas normales (cuando el overlay no está activo o como fallback) */
+:not(.overlay) > .card:hover {
+    --lightness: 95%;
+    background: hsla(var(--hsl), 0.1);
 }
 
-/* Responsive Fixes */
+/* Footer & Extras */
+footer { text-align: center; padding: 20px; color: #8892b0; font-size: 0.8rem; }
+.social-links a { color: #ccd6f6; transition: color 0.3s; }
+.social-links a:hover { color: var(--accent-color); }
+
+/* Responsive */
 @media screen and (max-width: 768px) {
-    .container { padding: 0 25px; }
+    nav { flex-direction: column; padding: 15px; }
+    .nav-links { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; }
     .hero h1 { font-size: 2.5rem; }
-    .hero .subtitle { font-size: 1.5rem; }
-    
-    nav { padding: 15px; flex-direction: column; gap: 15px; }
-    .nav-links { gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .nav-links a { font-size: 0.8rem; }
-    
-    section { padding: 60px 0; }
-    .project-card, .skill-category { padding: 1.5rem; }
-    .project-header { flex-direction: row; }
-    
-    .timeline-container { display: none !important; }
-    
-    /* En movil, el efecto grid debe mantenerse en 1 columna si es necesario */
-    .cards__inner { grid-template-columns: 1fr; }
 }
