@@ -194,11 +194,19 @@ const translations = {
     }
 };
 
+// Map of CV Files per Language
+const cvFiles = {
+    en: "CVHectorSalazar.pdf",      // Default
+    es: "CVHectorSalazar_ES.pdf",
+    pt: "CVHectorSalazar_PT.pdf",
+    fr: "CVHectorSalazar_FR.pdf"
+};
+
 // Language Logic
 function setLanguage(lang) {
     if (!translations[lang]) lang = 'en'; // Fallback
 
-    // Update DOM
+    // Update Text Elements
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) {
@@ -207,12 +215,20 @@ function setLanguage(lang) {
     });
 
     // Update Select Value
-    document.getElementById('lang-switcher').value = lang;
+    const switcher = document.getElementById('lang-switcher');
+    if(switcher) switcher.value = lang;
+
+    // Update CV Link
+    const cvLink = document.getElementById('cv-link');
+    if (cvLink) {
+        // Use mapping or fallback to English if missing
+        const newCvFile = cvFiles[lang] || cvFiles['en'];
+        cvLink.setAttribute('href', newCvFile);
+    }
 }
 
 function detectLanguage() {
     const browserLang = navigator.language || navigator.userLanguage;
-
     if (browserLang.startsWith('es')) return 'es';
     if (browserLang.startsWith('pt')) return 'pt';
     if (browserLang.startsWith('fr')) return 'fr';
@@ -221,14 +237,83 @@ function detectLanguage() {
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Language Setup
     const lang = detectLanguage();
     setLanguage(lang);
 
     // Event Listener for Switcher
-    document.getElementById('lang-switcher').addEventListener('change', (e) => {
-        setLanguage(e.target.value);
-    });
+    const switcher = document.getElementById('lang-switcher');
+    if(switcher) {
+        switcher.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+    }
+    
+    // 2. Analytics (CountAPI)
+    fetchVisitCount();
+    setInterval(updateDisplay, 1000);
+
+    // 3. Glowy Hover Effect Logic
+    initGlowEffect();
 });
+
+// Glowy Hover Effect Function
+function initGlowEffect() {
+    const cardsContainer = document.querySelector(".cards");
+    const cardsContainerInner = document.querySelector(".cards__inner");
+    const cards = Array.from(document.querySelectorAll(".project-card"));
+    const overlay = document.querySelector(".overlay");
+
+    // Guard clause
+    if (!cardsContainer || !overlay || cards.length === 0) return;
+
+    const applyOverlayMask = (e) => {
+        const overlayEl = e.currentTarget;
+        const x = e.pageX - cardsContainer.offsetLeft;
+        const y = e.pageY - cardsContainer.offsetTop;
+
+        overlayEl.style = `--opacity: 1; --x: ${x}px; --y:${y}px;`;
+    };
+
+    const observer = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+            const cardIndex = cards.indexOf(entry.target);
+            let width = entry.borderBoxSize[0].inlineSize;
+            let height = entry.borderBoxSize[0].blockSize;
+
+            if (cardIndex >= 0 && overlay.children[cardIndex]) {
+                overlay.children[cardIndex].style.width = `${width}px`;
+                overlay.children[cardIndex].style.height = `${height}px`;
+            }
+        });
+    });
+
+    const initOverlayCard = (cardEl) => {
+        const overlayCard = document.createElement("div");
+        overlayCard.classList.add("project-card");
+        // No content needed, just structure
+        overlay.append(overlayCard);
+        observer.observe(cardEl);
+    };
+
+    cards.forEach(initOverlayCard);
+    
+    // Apply event listener for mouse movement
+    document.body.addEventListener("pointermove", (e) => {
+        if (cardsContainer.contains(e.target)) {
+            applyOverlayMask(e);
+        } else {
+            // Optional: Hide glow if mouse leaves area
+            overlay.style.setProperty('--opacity', '0');
+        }
+    });
+    
+    // Additional listeners to ensure smoothness
+    if(overlay) {
+        overlay.addEventListener("pointermove", applyOverlayMask);
+        cardsContainer.addEventListener("pointermove", applyOverlayMask);
+    }
+}
 
 // Path of Light Animation
 document.addEventListener('scroll', () => {
@@ -236,77 +321,61 @@ document.addEventListener('scroll', () => {
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (winScroll / height) * 100;
 
-    document.getElementById("timeline-progress").style.height = scrolled + "%";
+    const progressBar = document.getElementById("timeline-progress");
+    if(progressBar) progressBar.style.height = scrolled + "%";
 });
 
 /* =========================================
-   REAL ANALYTICS (CountAPI + Time Tracker)
+   ANALYTICS (CountAPI + Time Tracker)
    ========================================= */
 
 const analyticsData = {
     startTime: Date.now(),
-    visits: "Cargando..." // Texto temporal mientras conecta
+    visits: "..." 
 };
 
-// 1. Función para obtener las visitas reales
 function fetchVisitCount() {
-    // Usamos tu usuario 'divaldinn' como namespace para que sea único
     fetch('https://api.countapi.xyz/hit/divaldinn.github.io/visits')
         .then(res => res.json())
         .then(data => {
-            analyticsData.visits = data.value; // Guardamos el valor real
-            updateDisplay(); // Actualizamos el texto
+            analyticsData.visits = data.value;
+            updateDisplay();
         })
         .catch(err => {
-            console.error("Error al obtener visitas:", err);
+            console.error("Analytics Error:", err);
             analyticsData.visits = "(Offline)";
         });
 }
 
-// 2. Función para actualizar el texto en pantalla (Tiempo + Visitas)
 function updateDisplay() {
     const timeSpent = Math.floor((Date.now() - analyticsData.startTime) / 1000);
     const display = document.getElementById('analytics-display');
     
     if (display) {
-        // Muestra: Tiempo en página: 12s | Visitas Totales: 450
         display.innerHTML = `Time on page: ${timeSpent}s | Total Visits: ${analyticsData.visits}`;
     }
 }
 
-// Inicialización
-document.addEventListener('DOMContentLoaded', () => {
-    fetchVisitCount(); // 1. Pedir el número de visitas al iniciar
-    setInterval(updateDisplay, 1000); // 2. Actualizar el cronómetro cada segundo
-});
-
-function updateAnalytics() {
-    const timeSpent = Math.floor((Date.now() - analyticsData.startTime) / 1000);
-    const display = document.getElementById('analytics-display');
-    if (display) {
-        display.innerHTML = `Time on page: ${timeSpent}s | Visits: ${analyticsData.visits}`;
-    }
-}
-
-setInterval(updateAnalytics, 1000);
-
 // Contact Form
-document.getElementById('contact-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('sender-name').value;
-    const subject = document.getElementById('subject').value;
-    const body = document.getElementById('body').value;
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('sender-name').value;
+        const subject = document.getElementById('subject').value;
+        const body = document.getElementById('body').value;
 
-    window.location.href = `mailto:hectore.salazar83@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + "\n\n" + body)}`;
-});
+        window.location.href = `mailto:hectore.salazar83@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + "\n\n" + body)}`;
+    });
+}
 
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
-
