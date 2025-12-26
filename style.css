@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
+
 :root {
     --bg-color: #0a192f;
     --card-bg: #112240;
@@ -7,6 +9,7 @@
     --line-color: #233554;
     --font-heading: 'Inter', 'Roboto', sans-serif;
     --font-body: 'Open Sans', 'Lato', sans-serif;
+    --font-alt: 'League Spartan', system-ui, sans-serif; /* Para los cards */
 }
 
 * {
@@ -24,32 +27,15 @@ body {
 }
 
 /* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: #e6f1ff;
     margin-bottom: 1rem;
 }
 
-h1 {
-    font-size: 3rem;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--accent-color);
-}
-
-h3 {
-    font-size: 1.5rem;
-    color: #e6f1ff;
-}
+h1 { font-size: 3rem; font-weight: 700; }
+h2 { font-size: 2rem; font-weight: 600; color: var(--accent-color); }
+h3 { font-size: 1.5rem; color: #e6f1ff; }
 
 p {
     margin-bottom: 1rem;
@@ -62,9 +48,7 @@ a {
     transition: color 0.3s;
 }
 
-a:hover {
-    text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
 /* Layout */
 .container {
@@ -108,68 +92,34 @@ nav {
     font-family: var(--font-heading);
 }
 
-.nav-links a:hover {
-    color: var(--accent-color);
-}
+.nav-links a:hover { color: var(--accent-color); }
 
-/* THE LANGUAGE SELECTOR */
+/* Language Switcher */
 .lang-switcher {
-    /* 1. Base Appearance */
     appearance: none;
-    /* Removes the ugly Windows/Mac style */
     -webkit-appearance: none;
-    /* Same for Safari/Chrome */
     background-color: transparent;
-    /* Transparent background */
-
-    /* 2. Colors and Borders */
     color: var(--accent-color);
-    /* Turquoise text */
     border: 1px solid var(--accent-color);
-    /* Thin turquoise border */
     border-radius: 4px;
-    /* Slightly rounded borders */
-
-    /* 3. Spacing and Font */
     padding: 8px 15px;
-    /* Internal airtime */
     font-family: var(--font-heading);
-    /* Your title font (Inter/Roboto) */
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    /* Hand on hover */
     text-align: center;
-
-    /* 4. Smooth transition */
     transition: all 0.2s ease;
 }
 
-/* HOVER EFFECT (On hover) */
 .lang-switcher:hover {
     background-color: rgba(100, 255, 218, 0.1);
-    /* Almost invisible turquoise background */
     box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
-    /* Soft glow */
 }
 
-/* FOCUS EFFECT (On click) */
-.lang-switcher:focus {
-    outline: none;
-    /* Removes the generic blue border */
-    background-color: rgba(100, 255, 218, 0.1);
-}
+.lang-switcher:focus { outline: none; background-color: rgba(100, 255, 218, 0.1); }
+.lang-switcher option { background-color: var(--bg-color); color: var(--text-color); padding: 10px; }
 
-/* THE OPTIONS (The dropdown menu) */
-.lang-switcher option {
-    background-color: var(--bg-color);
-    /* Dark black background */
-    color: var(--text-color);
-    /* White/gray text */
-    padding: 10px;
-}
-
-/* Path of Light (Timeline) */
+/* Timeline */
 .timeline-container {
     position: fixed;
     left: 40px;
@@ -180,13 +130,7 @@ nav {
     z-index: 50;
     display: none;
 }
-
-@media (min-width: 768px) {
-    .timeline-container {
-        display: block;
-    }
-}
-
+@media (min-width: 768px) { .timeline-container { display: block; } }
 .timeline-progress {
     width: 100%;
     background: var(--accent-color);
@@ -204,28 +148,11 @@ section {
     justify-content: center;
 }
 
-/* Hero Section */
-.hero {
-    min-height: 100vh;
-    align-items: flex-start;
-}
-
-.hero h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
-}
-
-.hero .subtitle {
-    font-size: 3rem;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-}
-
-.hero p {
-    max-width: 500px;
-    font-size: 1.1rem;
-}
-
+/* Hero */
+.hero { min-height: 100vh; align-items: flex-start; }
+.hero h1 { font-size: 4rem; margin-bottom: 10px; }
+.hero .subtitle { font-size: 3rem; color: var(--text-secondary); margin-bottom: 20px; }
+.hero p { max-width: 500px; font-size: 1.1rem; }
 .cta-btn {
     display: inline-block;
     border: 1px solid var(--accent-color);
@@ -235,14 +162,9 @@ section {
     margin-top: 20px;
     font-family: var(--font-heading);
 }
+.cta-btn:hover { background: rgba(100, 255, 218, 0.1); text-decoration: none; }
 
-.cta-btn:hover {
-    background: rgba(100, 255, 218, 0.1);
-    text-decoration: none;
-}
-
-/* MASTER STYLE FOR WINDOWS (Cards) */
-.project-card,
+/* Estilos de Cards Originales (para About, Skills, Education) */
 .skill-category,
 .about-content {
     background-color: var(--card-bg);
@@ -253,190 +175,177 @@ section {
     border: 1px solid transparent;
     transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-
-/* MOUSE HOVER EFFECT */
-.project-card:hover,
 .skill-category:hover {
     transform: translateY(-7px);
     border-color: var(--accent-color);
     box-shadow: 0 20px 30px -10px rgba(2, 12, 27, 0.9);
 }
 
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.folder-icon {
-    color: var(--accent-color);
-    font-size: 2rem;
-}
-
-.project-tech {
-    display: flex;
-    gap: 15px;
-    font-family: var(--font-heading);
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-top: 1rem;
-}
-
 /* Skills Grid */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.skill-category h3 { color: var(--accent-color); font-size: 1.2rem; margin-bottom: 1rem; }
+.skill-category ul { list-style: none; }
+.skill-category li { margin-bottom: 0.5rem; font-family: 'Roboto Mono', monospace; font-size: 0.9rem; color: var(--text-secondary); }
+.skill-category li i { color: var(--accent-color); margin-right: 10px; width: 20px; }
 
-.skill-category h3 {
-    color: var(--accent-color);
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+/* Contact Form */
+.contact-form { max-width: 600px; width: 100%; }
+.form-group { margin-bottom: 1.5rem; }
+input, textarea {
+    width: 100%; padding: 10px; background: #112240; border: 1px solid var(--line-color);
+    color: var(--text-color); border-radius: 4px; font-family: var(--font-body);
 }
-
-.skill-category ul {
-    list-style: none;
-}
-
-.skill-category li {
-    margin-bottom: 0.5rem;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-.skill-category li i {
-    color: var(--accent-color);
-    margin-right: 10px;
-    width: 20px;
-}
-
-/* Contact Section */
-.contact-form {
-    max-width: 600px;
-    width: 100%;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-input,
-textarea {
-    width: 100%;
-    padding: 10px;
-    background: #112240;
-    border: 1px solid var(--line-color);
-    color: var(--text-color);
-    border-radius: 4px;
-    font-family: var(--font-body);
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
+input:focus, textarea:focus { outline: none; border-color: var(--accent-color); }
 button[type="submit"] {
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-family: var(--font-heading);
+    background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color);
+    padding: 10px 20px; cursor: pointer; border-radius: 4px; font-family: var(--font-heading);
 }
-
-button[type="submit"]:hover {
-    background: rgba(100, 255, 218, 0.1);
-}
+button[type="submit"]:hover { background: rgba(100, 255, 218, 0.1); }
 
 /* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    font-family: var(--font-heading);
+footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-heading); }
+
+/* =========================================
+   GLOWY HOVER EFFECT (NUEVO CÓDIGO INTEGRADO)
+   ========================================= */
+
+.main__heading {
+  font-weight: 600;
+  font-size: 2.25em;
+  margin-bottom: 0.75em;
+  text-align: center;
+  color: #eceff1;
+  font-family: var(--font-alt);
+}
+
+.cards {
+  position: relative;
+}
+
+.cards__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5em;
+}
+
+.card {
+  --flow-space: 0.5em;
+  --hsl: var(--hue), var(--saturation), var(--lightness);
+  flex: 1 1 14rem;
+  padding: 1.5em 2em;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  align-items: start;
+  gap: 1.25em;
+  color: #eceff1;
+  background-color: #112240; /* Usamos el color de fondo de tarjeta de tu tema */
+  border: 1px solid #eceff133;
+  border-radius: 15px;
+  font-family: var(--font-alt); /* Fuente especial para cards */
+}
+
+/* COLORES DE LAS TARJETAS */
+/* Card 1: Verde (Coincide con tu acento) */
+.card:nth-child(1) {
+  --hue: 165; --saturation: 82.26%; --lightness: 51.37%;
+}
+/* Card 2: Morado */
+.card:nth-child(2) {
+  --hue: 291.34; --saturation: 95.9%; --lightness: 61.76%;
+}
+/* Card 3: Rosa */
+.card:nth-child(3) {
+  --hue: 338.69; --saturation: 100%; --lightness: 48.04%;
+}
+/* Card 4: Azul Cian */
+.card:nth-child(4) {
+  --hue: 190; --saturation: 90%; --lightness: 60%;
+}
+
+.card__bullets { line-height: 1.4; list-style: none; }
+.card__bullets li { font-size: 0.9rem; margin-bottom: 8px; color: var(--text-secondary); }
+
+/* Icono SVG de check */
+.card__bullets li::before {
+  display: inline-block;
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%2364ffda'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
+  transform: translatey(0.25ch);
+  margin-right: 1ch;
+}
+
+.card__heading { font-size: 1.5em; font-weight: 600; color: #fff; }
+.card__price { font-size: 1.2em; font-weight: 700; color: #fff; }
+.flow > * + * { margin-top: var(--flow-space, 1.25em); }
+
+/* ESTILO DEL BOTÓN CTA (El que se clona) */
+.cta {
+  display: block;
+  align-self: end;
+  margin: 1em 0 0.5em 0;
+  text-align: center;
+  text-decoration: none;
+  color: #fff !important;
+  background-color: #0d0d0d;
+  padding: 0.7em;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+}
+
+/* OVERLAY Y EFECTOS */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--opacity, 0);
+  -webkit-mask: radial-gradient(
+    25rem 25rem at var(--x) var(--y),
+    #000 1%,
+    transparent 50%
+  );
+  mask: radial-gradient(
+    25rem 25rem at var(--x) var(--y),
+    #000 1%,
+    transparent 50%
+  );
+  transition: 400ms mask ease;
+  will-change: mask;
+  z-index: 10;
+}
+
+.overlay .card {
+  background-color: hsla(var(--hsl), 0.15);
+  border-color: hsla(var(--hsl), 1);
+  box-shadow: 0 0 0 1px inset hsl(var(--hsl));
+}
+
+.overlay .cta {
+  display: block;
+  grid-row: -1;
+  width: 100%;
+  background-color: hsl(var(--hsl));
+  box-shadow: 0 0 0 1px hsl(var(--hsl));
+}
+
+:not(.overlay) > .card {
+  transition: 400ms background ease;
+  will-change: background;
+}
+
+:not(.overlay) > .card:hover {
+  --lightness: 95%;
+  background: hsla(var(--hsl), 0.1);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 25px;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .hero .subtitle {
-        font-size: 2rem;
-    }
-
-    nav {
-        padding: 20px;
-    }
-/* =========================================
-   MOBILE RESPONSIVE FIX (Pégalo al final)
-   ========================================= */
 @media screen and (max-width: 768px) {
-
-    /* 1. Ajustar el Menú de Navegación */
-    nav {
-        padding: 15px; /* Menos espacio */
-        flex-direction: column; /* Poner el logo arriba y menú abajo */
-        gap: 15px;
-    }
-
-    .nav-links {
-        gap: 10px; /* Juntar más los enlaces */
-        flex-wrap: wrap; /* Permitir que bajen si no caben */
-        justify-content: center;
-    }
-
-    .nav-links a {
-        font-size: 0.8rem; /* Letra un poco más chica */
-    }
-
-    /* 2. Ajustar Textos Gigantes */
-    .hero h1 {
-        font-size: 2.5rem; /* Reducir el título principal */
-    }
-    
-    .hero .subtitle {
-        font-size: 1.5rem;
-    }
-
-    /* 3. Ajustar los Contenedores */
-    .container {
-        padding: 0 20px; /* Margen lateral seguro */
-    }
-
-    section {
-        padding: 60px 0; /* Menos altura entre secciones */
-    }
-
-    /* 4. Tarjetas de Proyectos en Columna */
-    .project-card, .skill-category {
-        padding: 1.5rem; /* Menos relleno interno */
-    }
-    
-    .project-header {
-        flex-direction: row; /* Mantener iconos alineados */
-    }
-
-    /* 5. Ocultar la Línea de Tiempo en Móvil (Suele estorbar) */
-    .timeline-container {
-        display: none !important; 
-    }
-    
-    /* 6. Ajustar formulario de contacto */
-    .contact-form {
-        width: 100%; /* Que ocupe todo el ancho disponible */
-    }
-}
+    .container { padding: 0 25px; }
+    .hero h1 { font-size: 3rem; }
+    .hero .subtitle { font-size: 2rem; }
+    nav { padding: 15px; flex-direction: column; gap: 15px; }
+    .nav-links { gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .timeline-container { display: none !important; }
+    .contact-form { width: 100%; }
 }
